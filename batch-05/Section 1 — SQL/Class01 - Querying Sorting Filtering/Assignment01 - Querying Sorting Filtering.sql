@@ -15,6 +15,10 @@
 
 -- Write your query below:
 
+    select first_name,last_name,city,phone from sales.customers
+    where state='CA' and phone is not null
+
+
 
 
 
@@ -28,7 +32,8 @@
 
 -- Write your query below:
 
-
+    select product_id,product_name,model_year,list_price from production.products
+    order by model_year desc,list_price asc;
 
 
 -- ============================================================
@@ -41,11 +46,13 @@
 -- ============================================================
 
 -- Part a:
-
+    select TOP 5 product_name,list_price from production.products;
 
 -- Part b:
 
+    select TOP 5 PERCENT * from production.products;
 
+    (17 rows it fetches out of 321 and the exact 5 percent of 321 is 16.05)
 
 
 -- ============================================================
@@ -59,13 +66,25 @@
 -- ============================================================
 
 -- Page 1:
-
+    SELECT *
+    FROM production.products
+    ORDER BY list_price DESC
+    OFFSET 0 ROWS
+    FETCH NEXT 10 ROWS ONLY;
 
 -- Page 2:
-
+    SELECT *
+    FROM production.products
+    ORDER BY list_price DESC
+    OFFSET 10 ROWS
+    FETCH NEXT 10 ROWS ONLY;
 
 -- Page 3:
-
+    SELECT *
+    FROM production.products
+    ORDER BY list_price DESC
+    OFFSET 20 ROWS
+    FETCH NEXT 10 ROWS ONLY;
 
 
 
@@ -81,13 +100,17 @@
 -- ============================================================
 
 -- Part a:
-
+    select distinct state from sales.customers
+    order by state asc
+    ;
 
 -- Part b:
-
+    SELECT DISTINCT state, city
+    FROM sales.customers
+    ORDER BY state ASC, city ASC;
 
 -- Part c:
-
+    select count(distinct model_year) from production.products
 
 
 
@@ -103,3 +126,6 @@
 -- ============================================================
 
 -- Write your query below:
+    select product_id,product_name,brand_id,category_id,list_price,model_year from production.products
+    where list_price between 500 and 1500
+    and model_year = 2019 OR  model_year = 2020
